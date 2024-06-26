@@ -8,6 +8,11 @@ import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 @Document
 @Getter
 @Setter
@@ -20,6 +25,27 @@ public class FileData {
 
     private String fileName;
 
-    private byte[] fileData;
+    private String fileType;
 
+    private String delimiter;
+
+    private List<IndexColumn> indexColumn;
+
+    private List<IndexRow> indexRow;
+
+    @Getter
+    @Setter
+    @AllArgsConstructor
+    public static class IndexRow{
+        private Integer index;
+        private String rows;
+    }
+
+    @Getter
+    @Setter
+    @AllArgsConstructor
+    public static class IndexColumn{
+        private Integer index;
+        private String column;
+    }
 }
