@@ -8,6 +8,7 @@ import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -32,6 +33,8 @@ public class FileData {
     private List<IndexColumn> indexColumn;
 
     private List<IndexRow> indexRow;
+
+    private LocalDateTime createdAt;
 
     @Getter
     @Setter

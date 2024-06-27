@@ -16,7 +16,7 @@ import java.net.URI;
 import java.util.List;
 
 @RestController
-@RequestMapping
+@RequestMapping("/file")
 @AllArgsConstructor
 public class FileController {
 
@@ -27,15 +27,20 @@ public class FileController {
         FileData fileData = fileService.uploadFile(file.getOriginalFilename(), new BufferedReader(new InputStreamReader(file.getInputStream())));
 
         URI uri = ServletUriComponentsBuilder.fromCurrentContextPath()
-                .path("/{id}")
+                .path("/file/{id}")
                 .buildAndExpand(fileData.getId())
                 .toUri();
 
         return ResponseEntity.created(uri).build();
     }
 
+    @GetMapping("/{id}")
+    public FileData findFile(@PathVariable String id) {
+        return fileService.findFile(id);
+    }
+
     @GetMapping("/search")
-    public List<FileData> handleFileUpload(@RequestBody SearchDto search) {
+    public SearchDto.SearchResultDto handleFileUpload(@RequestBody SearchDto search) {
         return fileService.search(search.getSearchValue(), search.getPerPage(), search.getPage());
     }
 }
